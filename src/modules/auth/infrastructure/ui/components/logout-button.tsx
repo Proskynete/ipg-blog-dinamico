@@ -1,4 +1,4 @@
-import { Button } from "../../../../shared/infrastructure/ui/components/button";
+import { Button } from "../../../../../components/button.component";
 import { firebaseAuthRepository } from "../../services/firebase.auth.repository";
 
 export const SignOutButton = () => {

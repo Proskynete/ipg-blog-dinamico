@@ -22,6 +22,7 @@ const provider = new GoogleAuthProvider();
 
 export const firebaseAuthRepository: AuthRepository = {
   signIn: async () => {
+    auth.languageCode = "es";
     const result = await signInWithPopup(auth, provider);
     return result.user;
   },
