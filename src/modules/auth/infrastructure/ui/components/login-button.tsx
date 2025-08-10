@@ -1,5 +1,5 @@
 import { firebaseAuthRepository } from "../../services/firebase.auth.repository";
-import { Button } from "../../../../../components/button.component";
+import { FcGoogle } from "react-icons/fc";
 
 const SignInButton = () => {
   const handleClick = () => {
@@ -7,11 +7,13 @@ const SignInButton = () => {
   };
 
   return (
-    <Button
-      label="Iniciar sesión con Google"
+    <button
+      className="btn bg-white text-black border-[#e5e5e5] btn-sm"
       onClick={handleClick}
-      type="button"
-    />
+    >
+      <FcGoogle />
+      Iniciar Sesión
+    </button>
   );
 };
 

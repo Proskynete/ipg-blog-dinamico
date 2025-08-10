@@ -1,4 +1,3 @@
-import { Button } from "../../../../../components/button.component";
 import { firebaseAuthRepository } from "../../services/firebase.auth.repository";
 
 export const SignOutButton = () => {
@@ -6,5 +5,9 @@ export const SignOutButton = () => {
     firebaseAuthRepository.signOut();
   };
 
-  return <Button label="Cerrar sesión" onClick={handleClick} type="button" />;
+  return (
+    <button className="btn btn-soft btn-sm" onClick={handleClick} type="button">
+      Cerrar sesión
+    </button>
+  );
 };

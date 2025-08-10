@@ -8,47 +8,50 @@ const MainLayout = () => {
   const { state } = useAuth();
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <header className="border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-light tracking-tight text-gray-900">
-                Programación Front End
+                Curso de programación Frontend
               </h1>
               <p className="text-sm text-gray-500 mt-1">
                 Unidad 2: Desarrollo Avanzado de Interfaz de Usuario
               </p>
             </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <NavLink
-                to="/"
-                className="text-gray-900 hover:text-gray-600 transition-colors"
-              >
-                Inicio
-              </NavLink>
-              {state.state === "SIGNED_IN" ? (
+
+            <div className="flex items-center space-x-4">
+              <nav className="hidden md:flex items-center space-x-5">
                 <NavLink
-                  to="/my-posts"
+                  to="/"
                   className="text-gray-900 hover:text-gray-600 transition-colors"
                 >
-                  Mis Publicaciones
+                  Inicio
                 </NavLink>
-              ) : null}
+                {state.state === "SIGNED_IN" ? (
+                  <NavLink
+                    to="/my-posts"
+                    className="text-gray-900 hover:text-gray-600 transition-colors"
+                  >
+                    Mis Publicaciones
+                  </NavLink>
+                ) : null}
+              </nav>
               {state.state === "SIGNED_OUT" ? (
                 <SignInButton />
               ) : (
                 <SignOutButton />
               )}
-            </nav>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <main className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <Outlet />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
