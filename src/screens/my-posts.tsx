@@ -1,4 +1,5 @@
 import { Card } from "../components/card.component";
+import { Title } from "../components/title.component";
 
 const MyPosts = () => {
   const blogPosts = [
@@ -66,9 +67,7 @@ const MyPosts = () => {
 
   return (
     <section className="py-16">
-      <div className="mb-6">
-        <h3 className="text-2xl font-light text-gray-900">Mis Publicaciones</h3>
-      </div>
+      <Title title="Mis publicaciones" />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post, index) => (

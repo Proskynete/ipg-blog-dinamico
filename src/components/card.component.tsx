@@ -1,5 +1,4 @@
-import { FaRegCalendar } from "react-icons/fa6";
-import { FaRegClock } from "react-icons/fa6";
+import { FaRegCalendar, FaRegClock } from "react-icons/fa6";
 
 interface CardProps {
   title: string;
