@@ -80,7 +80,7 @@ const Home = () => {
   return (
     <>
       <section className="py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="">
           <Title title="El recomendado del mes" />
 
           <div className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -118,8 +118,8 @@ const Home = () => {
                     {featuredPost.readingTime}
                   </div>
                 </div>
-                xw
-                <button className="btn btn-dash btn-soft btn-sm">
+
+                <button className="btn btn-dash btn-soft btn-sm mt-3">
                   Leer artículo
                   <FaArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </button>

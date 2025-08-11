@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import { Card } from "../components/card.component";
 import { Title } from "../components/title.component";
+import { useAuth } from "../modules/auth/infrastructure/ui/hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const MyPosts = () => {
+  const { state } = useAuth();
+  const navigate = useNavigate();
+
   const blogPosts = [
     {
       title: "Finding Beauty in Simplicity",
@@ -64,6 +70,13 @@ const MyPosts = () => {
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/meditation-corner-cushion-EudzNh7GFckgWKsU1TJleiAIh0kdYn.png",
     },
   ];
+
+  useEffect(() => {
+    console.log(state.state);
+    if (state.state === "SIGNED_OUT") {
+      navigate("/");
+    }
+  }, [state.state, navigate]);
 
   return (
     <section className="py-16">
