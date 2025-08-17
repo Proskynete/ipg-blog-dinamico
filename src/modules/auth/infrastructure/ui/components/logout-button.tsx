@@ -6,7 +6,11 @@ export const SignOutButton = () => {
   };
 
   return (
-    <button className="btn btn-soft btn-sm" onClick={handleClick} type="button">
+    <button
+      className="btn btn-outline btn-error btn-sm"
+      onClick={handleClick}
+      type="button"
+    >
       Cerrar sesión
     </button>
   );

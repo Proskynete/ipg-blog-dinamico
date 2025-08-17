@@ -1,6 +1,6 @@
 import { FaArrowRight, FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { Card } from "../components/card.component";
-import { Title } from "../components/title.component";
+import { HeaderSection } from "../components/title.component";
 
 const Home = () => {
   const featuredPost = {
@@ -80,8 +80,8 @@ const Home = () => {
   return (
     <>
       <section className="py-12">
-        <div className="">
-          <Title title="El recomendado del mes" />
+        <div>
+          <HeaderSection title="El recomendado del mes" />
 
           <div className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="grid md:grid-cols-2 gap-0">
@@ -130,7 +130,7 @@ const Home = () => {
       </section>
 
       <section className="py-16">
-        <Title title="Últimas publicaciones" />
+        <HeaderSection title="Últimas publicaciones" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
