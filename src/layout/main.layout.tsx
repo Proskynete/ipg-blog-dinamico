@@ -30,7 +30,7 @@ const MainLayout = () => {
                 </NavLink>
                 {state.state === "SIGNED_IN" ? (
                   <NavLink
-                    to="/my-posts"
+                    to="/my-workspace/my-posts"
                     className="text-gray-900 hover:text-gray-600 transition-colors"
                   >
                     Mis Publicaciones

@@ -2,6 +2,7 @@ import type { Timestamp } from "firebase/firestore";
 
 export interface Post {
   id: string;
+  slug: string;
   bellowTo: string;
   isActive: boolean;
   title: string;

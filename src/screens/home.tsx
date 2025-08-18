@@ -31,18 +31,7 @@ const Home = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading && <p>Cargando publicaciones...</p>}
           {posts && posts.length > 0 ? (
-            posts.map((post, index) => (
-              <Card
-                key={index}
-                title={post.title}
-                description={post.excerpt}
-                date={post.date}
-                readingTime={post.readTime}
-                imageUrl={post.image}
-                category={post.category}
-                isActive={post.isActive}
-              />
-            ))
+            posts.map((post) => <Card key={post.id} {...post} />)
           ) : (
             <p>No hay publicaciones disponibles.</p>
           )}

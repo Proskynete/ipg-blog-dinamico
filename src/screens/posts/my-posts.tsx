@@ -63,13 +63,7 @@ const MyPosts = () => {
           posts.map((post) => (
             <Card
               key={post.id}
-              title={post.title}
-              description={post.excerpt}
-              date={post.date}
-              readingTime={post.readTime}
-              imageUrl={post.image}
-              category={post.category}
-              isActive={post.isActive}
+              {...post}
               toggleAction={() => toggleAction(post.id, post.isActive)}
             />
           ))

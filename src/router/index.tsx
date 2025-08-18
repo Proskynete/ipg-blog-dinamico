@@ -14,11 +14,20 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       {
-        path: "/my-posts",
+        path: "/posts",
+        children: [
+          {
+            path: ":slug",
+            Component: Home,
+          },
+        ],
+      },
+      {
+        path: "/my-workspace",
         element: <ProtectedRoute />,
         children: [
-          { index: true, Component: MyPosts },
-          { path: "create", Component: CreateNewPost },
+          { path: "my-posts", Component: MyPosts },
+          { path: "create-new-post", Component: CreateNewPost },
         ],
       },
     ],
