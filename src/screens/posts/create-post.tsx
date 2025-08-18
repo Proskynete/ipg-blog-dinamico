@@ -1,10 +1,11 @@
 import { HeaderSection } from "../../components/header-section.component";
 import type { PostValues } from "../../modules/post/domain/post.schema";
+import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
 import { CreateNewPostForm } from "../../modules/post/infrastructure/ui/create-new-post";
 
 const CreateNewPost = () => {
-  const onSubmit = (data: PostValues) => {
-    console.log(JSON.stringify(data, null));
+  const onSubmit = async (data: PostValues) => {
+    await postRepository.create(data);
   };
 
   return (

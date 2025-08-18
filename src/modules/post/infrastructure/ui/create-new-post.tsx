@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postSchema, type PostValues } from "../../domain/post.schema";
+import { createNewPostSchema, type PostValues } from "../../domain/post.schema";
 import { DEFAULT_POST_VALUES } from "../constants/default-values.constant";
 
 interface CreateNewPostProps {
@@ -15,7 +15,7 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
     watch,
     formState: { errors, isDirty },
   } = useForm<PostValues>({
-    resolver: zodResolver(postSchema),
+    resolver: zodResolver(createNewPostSchema),
     mode: "onChange",
     defaultValues: DEFAULT_POST_VALUES,
   });

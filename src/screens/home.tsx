@@ -1,14 +1,15 @@
 import { FaArrowRight, FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { Card } from "../components/card.component";
 import { HeaderSection } from "../components/header-section.component";
+import { Timestamp } from "firebase/firestore";
 
 const Home = () => {
   const featuredPost = {
     title: "The Art of Minimalist Living",
     excerpt:
       "Discover how embracing simplicity can transform your daily life and bring clarity to your thoughts.",
-    date: "March 15, 2024",
-    readingTime: "5 min read",
+    date: Timestamp.fromDate(new Date("March 15, 2024")),
+    readingTime: 5,
     category: "Lifestyle",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimalist-natural-light-EVtGhd6RGR6bI7G1a87qq8ZZQpXz71.png",
@@ -19,8 +20,8 @@ const Home = () => {
       title: "Finding Beauty in Simplicity",
       excerpt:
         "How to appreciate the small moments and find joy in everyday experiences.",
-      date: "March 12, 2024",
-      readTime: "3 min read",
+      date: Timestamp.fromDate(new Date("March 12, 2024")),
+      readTime: 3,
       category: "Mindfulness",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/simple-white-flowers-nmRAiyiuuDA1xeGRTMCzZ9amzVzUQi.png",
@@ -29,8 +30,8 @@ const Home = () => {
       title: "Digital Minimalism Guide",
       excerpt:
         "A practical approach to reducing digital clutter and reclaiming your attention.",
-      date: "March 10, 2024",
-      readTime: "7 min read",
+      date: Timestamp.fromDate(new Date("March 10, 2024")),
+      readTime: 7,
       category: "Technology",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/clean-desk-laptop-FkFZMPXBKyQF0EkE1HnWxQeGQzGMPZ.png",
@@ -39,8 +40,8 @@ const Home = () => {
       title: "Sustainable Living Tips",
       excerpt:
         "Simple changes you can make today to live more sustainably and mindfully.",
-      date: "March 8, 2024",
-      readTime: "4 min read",
+      date: Timestamp.fromDate(new Date("March 8, 2024")),
+      readTime: 4,
       category: "Environment",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimal-pots-plants-81WOoPMJxU384JQ43DYPqyXiTRxDlq.png",
@@ -49,8 +50,8 @@ const Home = () => {
       title: "The Power of Morning Routines",
       excerpt:
         "How a simple morning routine can set the tone for a productive and peaceful day.",
-      date: "March 5, 2024",
-      readTime: "6 min read",
+      date: Timestamp.fromDate(new Date("March 5, 2024")),
+      readTime: 6,
       category: "Wellness",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/morning-coffee-journal-76CUlA6RGTmvz768TSGvKsPkmIeuUV.png",
@@ -59,8 +60,8 @@ const Home = () => {
       title: "Mindful Consumption",
       excerpt:
         "Learning to buy less but choose better, and how it impacts our well-being.",
-      date: "March 3, 2024",
-      readTime: "5 min read",
+      date: Timestamp.fromDate(new Date("March 3, 2024")),
+      readTime: 5,
       category: "Lifestyle",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimal-wardrobe-hanging-NH1RHzTQ1q14V3sKwN0SQh78ritzrk.png",
@@ -69,8 +70,8 @@ const Home = () => {
       title: "Creating Sacred Spaces",
       excerpt:
         "Transform any corner of your home into a peaceful retreat for reflection.",
-      date: "March 1, 2024",
-      readTime: "4 min read",
+      date: Timestamp.fromDate(new Date("March 1, 2024")),
+      readTime: 4,
       category: "Home",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/meditation-corner-cushion-EudzNh7GFckgWKsU1TJleiAIh0kdYn.png",
@@ -106,7 +107,7 @@ const Home = () => {
                 <div className="w-full flex items-center text-xs text-gray-500 gap-2">
                   <div className="flex items-center gap-1">
                     <FaRegCalendar />
-                    {featuredPost.date}
+                    {featuredPost.date.toDate().toISOString()}
                   </div>
                   <div className="flex items-center gap-1">
                     <FaRegClock />

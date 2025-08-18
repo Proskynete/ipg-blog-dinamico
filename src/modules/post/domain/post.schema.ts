@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const postSchema = z.object({
+export const createNewPostSchema = z.object({
   title: z.string().nonempty("El título es requerido"),
   slug: z.string().nonempty("El slug es requerido"),
   image: z
@@ -14,4 +14,4 @@ export const postSchema = z.object({
   content: z.string(),
 });
 
-export type PostValues = z.infer<typeof postSchema>;
+export type PostValues = z.infer<typeof createNewPostSchema>;
