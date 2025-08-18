@@ -2,19 +2,16 @@ import { FaArrowRight, FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { Card } from "../components/card.component";
 import { HeaderSection } from "../components/header-section.component";
 import { Timestamp } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import type { Post } from "../modules/post/domain/post.domain";
 import { postRepository } from "../modules/post/infrastructure/services/create-post.service";
 import { formatDate } from "../helpers/date.helper";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY } from "../constants/query-keys.constant";
 
 const Home = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    postRepository.getAll().then((posts) => {
-      setPosts(posts);
-    });
-  }, []);
+  const { data: posts, isLoading } = useQuery({
+    queryKey: [QUERY.posts.getAll],
+    queryFn: () => postRepository.getAll(),
+  });
 
   const featuredPost = {
     title: "The Art of Minimalist Living",
@@ -78,7 +75,8 @@ const Home = () => {
         <HeaderSection title="Últimas publicaciones" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.length > 0 ? (
+          {isLoading && <p>Cargando publicaciones...</p>}
+          {posts && posts.length > 0 ? (
             posts.map((post, index) => (
               <Card
                 key={index}

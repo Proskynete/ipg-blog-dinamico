@@ -1,37 +1,41 @@
 import { FaPlus } from "react-icons/fa6";
 import { HeaderSection } from "../../components/header-section.component";
 import { Card } from "../../components/card.component";
-import type { Post } from "../../modules/post/domain/post.domain";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
 import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
 import { useAuth } from "../../modules/auth/infrastructure/ui/hooks/useAuth";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QUERY } from "../../constants/query-keys.constant";
 
 const MyPosts = () => {
   const { state } = useAuth();
-
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [posts, setPosts] = useState<Post[]>([]);
 
-  useEffect(() => {
-    if (state.state === "SIGNED_IN") {
-      postRepository.getAll(state.currentUser.uid).then((posts) => {
-        setPosts(posts);
-      });
-    }
-  }, [state]);
+  const mutation = useMutation({
+    mutationFn: ({ id, isActive }: { id: string; isActive: boolean }) =>
+      postRepository.toggleActive(id, isActive),
+  });
+
+  const { data: posts, isLoading } = useQuery({
+    queryKey: [QUERY.posts.getAllMyPosts],
+    queryFn: () => {
+      if (state.state === "SIGNED_IN") {
+        return postRepository.getAll(state.currentUser.uid);
+      }
+    },
+  });
 
   const handleCreatePost = () => {
     navigate("/my-posts/create");
   };
 
   const toggleAction = async (id: string, isActive: boolean) => {
-    await postRepository.toggleActive(id, isActive);
-    const newPosts = posts.map((post) => {
-      if (post.id === id) return { ...post, isActive: !isActive };
-      return post;
+    mutation.mutate({ id, isActive });
+
+    await queryClient.invalidateQueries({
+      queryKey: [QUERY.posts.getAllMyPosts],
     });
-    setPosts(newPosts);
   };
 
   return (
@@ -53,10 +57,12 @@ const MyPosts = () => {
       />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.length > 0 ? (
-          posts.map((post, index) => (
+        {isLoading && <p>Cargando publicaciones...</p>}
+
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
             <Card
-              key={index}
+              key={post.id}
               title={post.title}
               description={post.excerpt}
               date={post.date}
