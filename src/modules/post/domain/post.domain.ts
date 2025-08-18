@@ -4,11 +4,12 @@ export interface Post {
   bellowTo: string;
   isActive: boolean;
   title: string;
-  excerpt: string;
+  image: string;
   date: Timestamp;
   readTime: number;
   category: string;
-  image: string;
+  excerpt: string;
+  content: string;
   createdAt: Timestamp;
   updatedAt?: Timestamp;
   deletedAt?: Timestamp;

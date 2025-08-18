@@ -1,5 +1,6 @@
 import type { Timestamp } from "firebase/firestore";
 import { FaRegCalendar, FaRegClock } from "react-icons/fa6";
+import { formatDate } from "../helpers/date.helper";
 
 interface CardProps {
   title: string;
@@ -34,7 +35,7 @@ export const Card = ({
       </div>
       <div data-slot="card-content" className="px-6">
         <div className="flex flex-wrap gap-2 mb-1">
-          <span className="badge badge-xs badge-neutral badge-dash">
+          <span className="badge badge-xs badge-neutral badge-dash capitalize">
             {category}
           </span>
         </div>
@@ -47,11 +48,11 @@ export const Card = ({
         <div className="w-full flex items-center text-xs text-gray-500 gap-2">
           <div className="flex items-center gap-1">
             <FaRegCalendar />
-            {new Date(date.seconds * 1000).toISOString()}
+            {formatDate(date.seconds)}
           </div>
           <div className="flex items-center gap-1">
             <FaRegClock />
-            {readingTime}
+            {readingTime} min. de lectura
           </div>
         </div>
       </div>

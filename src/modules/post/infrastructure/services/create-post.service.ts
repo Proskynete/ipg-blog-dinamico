@@ -1,3 +1,4 @@
+import { calculateReadingTime } from "../../../../helpers/common.helper";
 import { firebaseDB } from "../../../../helpers/firebase.helper";
 import type { CreatePost, Post } from "../../domain/post.domain";
 import type { PostRepository } from "../../domain/post.repository";
@@ -47,7 +48,7 @@ const create = async (data: CreatePost, uid: string): Promise<void> => {
     ...data,
     isActive: true,
     bellowTo: uid,
-    readTime: 2,
+    readTime: calculateReadingTime(data.content),
     date: Timestamp.fromDate(new Date()),
     createdAt: Timestamp.fromDate(new Date()),
   };

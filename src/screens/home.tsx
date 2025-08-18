@@ -5,6 +5,7 @@ import { Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import type { Post } from "../modules/post/domain/post.domain";
 import { postRepository } from "../modules/post/infrastructure/services/create-post.service";
+import { formatDate } from "../helpers/date.helper";
 
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -43,7 +44,7 @@ const Home = () => {
               </div>
 
               <div className="p-8 md:p-12 flex flex-col justify-center">
-                <span className="badge badge-xs badge-neutral badge-dash">
+                <span className="badge badge-xs badge-neutral badge-dash capitalize">
                   {featuredPost.category}
                 </span>
                 <h4 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 leading-tight">
@@ -55,11 +56,11 @@ const Home = () => {
                 <div className="w-full flex items-center text-xs text-gray-500 gap-2">
                   <div className="flex items-center gap-1">
                     <FaRegCalendar />
-                    {featuredPost.date.toDate().toISOString()}
+                    {formatDate(featuredPost.date.seconds)}
                   </div>
                   <div className="flex items-center gap-1">
                     <FaRegClock />
-                    {featuredPost.readingTime}
+                    {featuredPost.readingTime} min. de lectura
                   </div>
                 </div>
 
