@@ -1,9 +1,6 @@
-import { FaArrowRight, FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { Card } from "../components/card.component";
 import { HeaderSection } from "../components/header-section.component";
-import { Timestamp } from "firebase/firestore";
 import { postRepository } from "../modules/post/infrastructure/services/create-post.service";
-import { formatDate } from "../helpers/date.helper";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY } from "../constants/query-keys.constant";
 
@@ -13,64 +10,21 @@ const Home = () => {
     queryFn: () => postRepository.getAll(),
   });
 
-  const featuredPost = {
-    title: "The Art of Minimalist Living",
-    excerpt:
-      "Discover how embracing simplicity can transform your daily life and bring clarity to your thoughts.",
-    date: Timestamp.fromDate(new Date("March 15, 2024")),
-    readingTime: 5,
-    category: "Lifestyle",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimalist-natural-light-EVtGhd6RGR6bI7G1a87qq8ZZQpXz71.png",
-  };
-
   return (
     <>
-      <section className="py-12">
-        <div>
-          <HeaderSection title="El recomendado del mes" />
-
-          <div className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow duration-300">
-            <div className="grid md:grid-cols-2 gap-0">
-              <div className="relative h-64 md:h-full">
-                <img
-                  src={featuredPost.image || "/placeholder.svg"}
-                  alt={featuredPost.title}
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="p-8 md:p-12 flex flex-col justify-center">
-                <span className="badge badge-xs badge-neutral badge-dash capitalize">
-                  {featuredPost.category}
-                </span>
-                <h4 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 leading-tight">
-                  {featuredPost.title}
-                </h4>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="w-full flex items-center text-xs text-gray-500 gap-2">
-                  <div className="flex items-center gap-1">
-                    <FaRegCalendar />
-                    {formatDate(featuredPost.date.seconds)}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FaRegClock />
-                    {featuredPost.readingTime} min. de lectura
-                  </div>
-                </div>
-
-                <button className="btn  btn-secondary btn-sm mt-3">
-                  Leer artículo
-                  <FaArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-          </div>
+      <section className="py-16 sm:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-900 leading-tight">
+            Programación Frontend
+          </h2>
+          <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Este proyecto es creado para la asignatura de programación Frontend
+            de IPG, semana 4 - Encargo, donde se implementa un blog dinámico
+            utilizando React, TypeScript, Tailwind con DaisyUI, Tanstack Query,
+            React hook form con Zod y Firebase.
+          </p>
         </div>
       </section>
-
       <section className="py-16">
         <HeaderSection title="Últimas publicaciones" />
 
