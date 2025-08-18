@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createNewPostSchema, type PostValues } from "../../domain/post.schema";
 import { DEFAULT_POST_VALUES } from "../constants/default-values.constant";
+import { FaCircleInfo } from "react-icons/fa6";
 
 interface CreateNewPostProps {
   onSubmit: (data: PostValues) => void;
@@ -50,11 +51,21 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
             </div>
 
             <div className="w-full flex flex-col space-y-1">
-              <label className="label">Slug</label>
+              <label className="label">
+                Slug
+                <div
+                  className="tooltip tooltip-accent inline"
+                  data-tip="Se generará automáticamente a partir del título"
+                >
+                  <FaCircleInfo className="inline" />
+                </div>
+              </label>
+
               <input
                 id="slug"
                 type="text"
                 className={`input w-full ${errors.slug ? "input-error" : ""}`}
+                placeholder="titulo-del-sitio"
                 aria-invalid={errors.slug ? "true" : "false"}
                 disabled
                 {...register("slug")}
@@ -71,6 +82,7 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
                 type="url"
                 className={`input w-full ${errors.image ? "input-error" : ""}`}
                 aria-invalid={errors.image ? "true" : "false"}
+                placeholder="https://example.com/image.jpg"
                 {...register("image")}
               />
               <p className="label text-xs">{errors.image?.message}</p>
@@ -84,7 +96,9 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
                 className="select w-full"
                 {...register("category")}
               >
-                <option disabled={true}>Selecciona una categoría</option>
+                <option disabled={true} selected>
+                  Selecciona una categoría
+                </option>
                 <option value="frontend">Frontend</option>
                 <option value="backend">Backend</option>
                 <option value="devops">Devops</option>
@@ -115,15 +129,29 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
 
           <div className="divider" />
 
-          <div className="w-full flex flex-col space-y-1">
-            <textarea
-              id="content"
-              className={`textarea w-full ${
-                errors.content ? "textarea-error text-error" : ""
-              }`}
-              placeholder="Lorem ipsum..."
-              {...register("content")}
-            />
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="w-full flex flex-col space-y-1">
+              <label className="label">Contenido del artículo</label>
+              <textarea
+                id="content"
+                className={`textarea w-full ${
+                  errors.content ? "textarea-error text-error" : ""
+                }`}
+                rows={20}
+                placeholder="Lorem ipsum..."
+                {...register("content")}
+              />
+            </div>
+
+            <div className="w-full flex flex-col space-y-1">
+              <p className="label">Preview</p>
+              <div className="mockup-browser border-base-300 border w-full">
+                <div className="mockup-browser-toolbar">
+                  <div className="input">https://eduardoalvarez.dev</div>
+                </div>
+                <div className="grid place-content-center border-t border-base-300 h-96"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
