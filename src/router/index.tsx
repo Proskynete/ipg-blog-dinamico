@@ -4,7 +4,8 @@ import { lazy } from "react";
 import ProtectedRoute from "./protected-route";
 
 const Home = lazy(() => import("../screens/home"));
-const MyPosts = lazy(() => import("../screens/my-posts"));
+const MyPosts = lazy(() => import("../screens/posts/my-posts"));
+const CreateNewPost = lazy(() => import("../screens/posts/create-post"));
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { index: true, Component: MyPosts },
-          { path: "edit/:id", Component: MyPosts },
+          { path: "create", Component: CreateNewPost },
         ],
       },
     ],

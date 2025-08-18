@@ -13,12 +13,10 @@ const MainLayout = () => {
         <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-light tracking-tight text-gray-900">
-                Curso de programación Frontend
-              </h1>
-              <p className="text-sm text-gray-500 mt-1">
-                Unidad 2: Desarrollo Avanzado de Interfaz de Usuario
-              </p>
+              <img
+                className="w-[230px]"
+                src="https://www.ipg.cl/wp-content/uploads/2023/12/logo-ipg.png"
+              />
             </div>
 
             <div className="flex items-center space-x-4">

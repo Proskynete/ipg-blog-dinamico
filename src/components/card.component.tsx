@@ -6,7 +6,7 @@ interface CardProps {
   date: string;
   readingTime: string;
   imageUrl: string;
-  categories: string[];
+  category: string;
 }
 
 export const Card = ({
@@ -15,7 +15,7 @@ export const Card = ({
   date,
   readingTime,
   imageUrl,
-  categories,
+  category,
 }: CardProps) => {
   return (
     <div
@@ -33,11 +33,9 @@ export const Card = ({
       </div>
       <div data-slot="card-content" className="px-6">
         <div className="flex flex-wrap gap-2 mb-1">
-          {categories.map((category, i) => (
-            <span key={i} className="badge badge-xs badge-neutral badge-dash">
-              {category}
-            </span>
-          ))}
+          <span className="badge badge-xs badge-neutral badge-dash">
+            {category}
+          </span>
         </div>
         <h4 className="text-xl font-light text-gray-900 mb-3 leading-tight group-hover:text-gray-600 transition-colors">
           {title}

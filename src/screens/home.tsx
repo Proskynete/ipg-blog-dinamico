@@ -1,6 +1,6 @@
 import { FaArrowRight, FaRegCalendar, FaRegClock } from "react-icons/fa6";
 import { Card } from "../components/card.component";
-import { HeaderSection } from "../components/title.component";
+import { HeaderSection } from "../components/header-section.component";
 
 const Home = () => {
   const featuredPost = {
@@ -9,7 +9,7 @@ const Home = () => {
       "Discover how embracing simplicity can transform your daily life and bring clarity to your thoughts.",
     date: "March 15, 2024",
     readingTime: "5 min read",
-    category: ["Lifestyle"],
+    category: "Lifestyle",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimalist-natural-light-EVtGhd6RGR6bI7G1a87qq8ZZQpXz71.png",
   };
@@ -21,7 +21,7 @@ const Home = () => {
         "How to appreciate the small moments and find joy in everyday experiences.",
       date: "March 12, 2024",
       readTime: "3 min read",
-      category: ["Mindfulness"],
+      category: "Mindfulness",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/simple-white-flowers-nmRAiyiuuDA1xeGRTMCzZ9amzVzUQi.png",
     },
@@ -31,7 +31,7 @@ const Home = () => {
         "A practical approach to reducing digital clutter and reclaiming your attention.",
       date: "March 10, 2024",
       readTime: "7 min read",
-      category: ["Technology"],
+      category: "Technology",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/clean-desk-laptop-FkFZMPXBKyQF0EkE1HnWxQeGQzGMPZ.png",
     },
@@ -41,7 +41,7 @@ const Home = () => {
         "Simple changes you can make today to live more sustainably and mindfully.",
       date: "March 8, 2024",
       readTime: "4 min read",
-      category: ["Environment"],
+      category: "Environment",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimal-pots-plants-81WOoPMJxU384JQ43DYPqyXiTRxDlq.png",
     },
@@ -51,7 +51,7 @@ const Home = () => {
         "How a simple morning routine can set the tone for a productive and peaceful day.",
       date: "March 5, 2024",
       readTime: "6 min read",
-      category: ["Wellness", "Technology"],
+      category: "Wellness",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/morning-coffee-journal-76CUlA6RGTmvz768TSGvKsPkmIeuUV.png",
     },
@@ -61,7 +61,7 @@ const Home = () => {
         "Learning to buy less but choose better, and how it impacts our well-being.",
       date: "March 3, 2024",
       readTime: "5 min read",
-      category: ["Lifestyle"],
+      category: "Lifestyle",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/minimal-wardrobe-hanging-NH1RHzTQ1q14V3sKwN0SQh78ritzrk.png",
     },
@@ -71,7 +71,7 @@ const Home = () => {
         "Transform any corner of your home into a peaceful retreat for reflection.",
       date: "March 1, 2024",
       readTime: "4 min read",
-      category: ["Home"],
+      category: "Home",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/meditation-corner-cushion-EudzNh7GFckgWKsU1TJleiAIh0kdYn.png",
     },
@@ -94,14 +94,9 @@ const Home = () => {
               </div>
 
               <div className="p-8 md:p-12 flex flex-col justify-center">
-                {featuredPost.category.map((category, i) => (
-                  <span
-                    key={i}
-                    className="badge badge-xs badge-neutral badge-dash"
-                  >
-                    {category}
-                  </span>
-                ))}
+                <span className="badge badge-xs badge-neutral badge-dash">
+                  {featuredPost.category}
+                </span>
                 <h4 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 leading-tight">
                   {featuredPost.title}
                 </h4>
@@ -119,7 +114,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <button className="btn btn-dash btn-soft btn-sm mt-3">
+                <button className="btn  btn-secondary btn-sm mt-3">
                   Leer artículo
                   <FaArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -141,7 +136,7 @@ const Home = () => {
               date={post.date}
               readingTime={post.readTime}
               imageUrl={post.image}
-              categories={post.category}
+              category={post.category}
             />
           ))}
         </div>

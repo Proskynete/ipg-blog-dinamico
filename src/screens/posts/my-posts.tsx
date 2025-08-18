@@ -1,9 +1,12 @@
-import { Card } from "../components/card.component";
-import { HeaderSection } from "../components/title.component";
 import { FaPlus } from "react-icons/fa6";
-import type { Post } from "../modules/post/domain/post.domain";
+import { HeaderSection } from "../../components/header-section.component";
+import { Card } from "../../components/card.component";
+import type { Post } from "../../modules/post/domain/post.domain";
+import { useNavigate } from "react-router";
 
 const MyPosts = () => {
+  const navigate = useNavigate();
+
   const blogPosts: Post[] = [
     // {
     //   title: "Finding Beauty in Simplicity",
@@ -68,28 +71,11 @@ const MyPosts = () => {
   ];
 
   const handleShowModal = () => {
-    const _dialog = document.getElementById(
-      "createNewPost"
-    ) as HTMLDialogElement;
-    _dialog?.showModal();
+    navigate("/my-posts/create");
   };
 
   return (
     <section className="py-16">
-      <dialog id="createNewPost" className="modal">
-        <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">Crear nueva publicación</h3>
-          <p className="py-4">Click the button below to close</p>
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn btn-outline btn-error btn-sm">
-                Cerrar
-              </button>
-            </form>
-          </div>
-        </div>
-      </dialog>
-
       <HeaderSection
         title="Mis publicaciones"
         actions={[
@@ -116,7 +102,7 @@ const MyPosts = () => {
               date={post.date}
               readingTime={post.readTime}
               imageUrl={post.image}
-              categories={post.category}
+              category={post.category}
             />
           ))
         ) : (
