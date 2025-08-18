@@ -1,6 +1,8 @@
 import type { Timestamp } from "firebase/firestore";
 
 export interface Post {
+  bellowTo: string;
+  isActive: boolean;
   title: string;
   excerpt: string;
   date: Timestamp;
@@ -14,5 +16,11 @@ export interface Post {
 
 export type CreatePost = Omit<
   Post,
-  "readTime" | "date" | "createdAt" | "updatedAt" | "deletedAt"
+  | "bellowTo"
+  | "isActive"
+  | "readTime"
+  | "date"
+  | "createdAt"
+  | "updatedAt"
+  | "deletedAt"
 >;

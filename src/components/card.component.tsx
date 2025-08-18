@@ -18,7 +18,6 @@ export const Card = ({
   imageUrl,
   category,
 }: CardProps) => {
-  console.log({ date });
   return (
     <div
       data-slot="card"

@@ -5,16 +5,21 @@ import type { Post } from "../../modules/post/domain/post.domain";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
+import { useAuth } from "../../modules/auth/infrastructure/ui/hooks/useAuth";
 
 const MyPosts = () => {
+  const { state } = useAuth();
+
   const navigate = useNavigate();
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    postRepository.getAll().then((posts) => {
-      setPosts(posts);
-    });
-  }, []);
+    if (state.state === "SIGNED_IN") {
+      postRepository.getAll(state.currentUser.uid).then((posts) => {
+        setPosts(posts);
+      });
+    }
+  }, [state]);
 
   const handleShowModal = () => {
     navigate("/my-posts/create");
