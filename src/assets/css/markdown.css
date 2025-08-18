@@ -1,0 +1,156 @@
+#articleBody {
+  font-size: 0.5rem;
+}
+
+#articleBody h1 {
+  font-size: xx-large;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody h2 {
+  font-size: large;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody h3 {
+  font-size: large;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody h4 {
+  font-size: x-small;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody h5 {
+  font-size: xx-small;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody h6 {
+  font-size: smaller;
+
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#articleBody p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#articleBody a {
+  color: #4299e1;
+  text-decoration: none;
+}
+
+#articleBody a:hover {
+  color: #3182ce;
+  text-decoration: none;
+}
+
+#articleBody blockquote {
+  border-color: #e2e8f0;
+  border-left-width: 4px;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  color: #2d3748;
+}
+
+#articleBody code {
+  background-color: #e2e8f0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 0.25rem;
+}
+
+#articleBody hr {
+  border-bottom-width: 1px;
+  border-color: #e2e8f0;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 9999px;
+}
+
+#articleBody ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#articleBody ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#articleBody table {
+  width: 100%;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+#articleBody table tr {
+  border-top-width: 1px;
+  border-color: #4a5568;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+#articleBody table tr:nth-child(2n) {
+  background-color: #f7fafc;
+}
+
+#articleBody table tr th {
+  font-weight: 700;
+  border-width: 1px;
+  border-color: #4a5568;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+#articleBody table tr th:first-child {
+  margin-top: 0;
+}
+
+#articleBody table tr th:last-child {
+  margin-bottom: 0;
+}
+
+#articleBody table tr td {
+  border-width: 1px;
+  border-color: #4a5568;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+#articleBody table tr td:first-child {
+  margin-top: 0;
+}
+
+#articleBody table tr td:last-child {
+  margin-bottom: 0;
+}

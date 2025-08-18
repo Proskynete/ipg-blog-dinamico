@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createNewPostSchema, type PostValues } from "../../domain/post.schema";
 import { DEFAULT_POST_VALUES } from "../constants/default-values.constant";
 import { FaCircleInfo } from "react-icons/fa6";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface CreateNewPostProps {
   onSubmit: (data: PostValues) => void;
@@ -92,11 +94,11 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
               <label className="label">Categorías</label>
               <select
                 id="category"
-                defaultValue="Pick a browser"
+                defaultValue=""
                 className="select w-full"
                 {...register("category")}
               >
-                <option disabled={true} selected>
+                <option disabled={true} value="">
                   Selecciona una categoría
                 </option>
                 <option value="frontend">Frontend</option>
@@ -143,15 +145,22 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
               />
             </div>
 
-            <div className="w-full flex flex-col space-y-1">
+            <section className="w-full flex flex-col space-y-1">
               <p className="label">Preview</p>
               <div className="mockup-browser border-base-300 border w-full">
                 <div className="mockup-browser-toolbar">
                   <div className="input">https://eduardoalvarez.dev</div>
                 </div>
-                <div className="grid place-content-center border-t border-base-300 h-96"></div>
+                <div
+                  id="articleBody"
+                  className="p-1 border-t border-base-300 h-96 overflow-y-auto"
+                >
+                  <Markdown remarkPlugins={[remarkGfm]}>
+                    {watch("content")}
+                  </Markdown>
+                </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import "./assets/css/main.css";
+import "./assets/css/markdown.css";
 
 import { createRoot } from "react-dom/client";
 import { App } from "./app.tsx";
