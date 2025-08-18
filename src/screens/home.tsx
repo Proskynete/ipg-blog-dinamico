@@ -88,6 +88,7 @@ const Home = () => {
                 readingTime={post.readTime}
                 imageUrl={post.image}
                 category={post.category}
+                isActive={post.isActive}
               />
             ))
           ) : (

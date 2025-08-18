@@ -12,12 +12,12 @@ const MainLayout = () => {
       <header className="border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <div>
+            <NavLink to="/">
               <img
                 className="w-[230px]"
                 src="https://www.ipg.cl/wp-content/uploads/2023/12/logo-ipg.png"
               />
-            </div>
+            </NavLink>
 
             <div className="flex items-center space-x-4">
               <nav className="hidden md:flex items-center space-x-5">

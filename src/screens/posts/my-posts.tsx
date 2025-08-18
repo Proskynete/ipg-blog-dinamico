@@ -21,8 +21,17 @@ const MyPosts = () => {
     }
   }, [state]);
 
-  const handleShowModal = () => {
+  const handleCreatePost = () => {
     navigate("/my-posts/create");
+  };
+
+  const toggleAction = async (id: string, isActive: boolean) => {
+    await postRepository.toggleActive(id, isActive);
+    const newPosts = posts.map((post) => {
+      if (post.id === id) return { ...post, isActive: !isActive };
+      return post;
+    });
+    setPosts(newPosts);
   };
 
   return (
@@ -38,7 +47,7 @@ const MyPosts = () => {
               </>
             ),
             className: "btn btn-outline btn-accent btn-sm",
-            onClick: handleShowModal,
+            onClick: handleCreatePost,
           },
         ]}
       />
@@ -54,6 +63,8 @@ const MyPosts = () => {
               readingTime={post.readTime}
               imageUrl={post.image}
               category={post.category}
+              isActive={post.isActive}
+              toggleAction={() => toggleAction(post.id, post.isActive)}
             />
           ))
         ) : (

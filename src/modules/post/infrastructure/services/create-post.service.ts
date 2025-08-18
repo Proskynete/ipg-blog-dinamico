@@ -16,16 +16,18 @@ import {
 
 const getAll = async (bellowTo?: string): Promise<Post[]> => {
   const postsCollection = collection(firebaseDB, "posts");
-  const queryBase = [where("isActive", "==", true)];
+  let _query = where("isActive", "==", true);
 
-  if (bellowTo) queryBase.push(where("bellowTo", "==", bellowTo));
+  if (bellowTo) {
+    _query = where("bellowTo", "==", bellowTo);
+  }
 
-  const q = query(postsCollection, ...queryBase);
+  const q = query(postsCollection, _query);
   const querySnapshot = await getDocs(q);
 
   const posts = querySnapshot.docs.map((doc) => ({
     id: doc.id,
-    ...(doc.data() as Post),
+    ...(doc.data() as Omit<Post, "id">),
   }));
 
   return posts;
@@ -37,14 +39,17 @@ const getById = async (id: string): Promise<Post | null> => {
 
   if (postSnapshot.exists()) {
     if (!postSnapshot.data()?.isActive) {
-      return { ...(postSnapshot.data() as Post) };
+      return {
+        id: postSnapshot.id,
+        ...(postSnapshot.data() as Omit<Post, "id">),
+      };
     }
   }
   return null;
 };
 
 const create = async (data: CreatePost, uid: string): Promise<void> => {
-  const newPost: Post = {
+  const newPost: Omit<Post, "id"> = {
     ...data,
     isActive: true,
     bellowTo: uid,
@@ -56,12 +61,12 @@ const create = async (data: CreatePost, uid: string): Promise<void> => {
   setDoc(doc(firebaseDB, "posts", crypto.randomUUID()), newPost);
 };
 
-const remove = async (id: string): Promise<void> => {
+const toggleActive = async (id: string, isActive: boolean): Promise<void> => {
   const postsCollection = doc(firebaseDB, "posts", id);
 
   const data = {
-    deletedAt: Timestamp.fromDate(new Date()),
-    isActive: false,
+    isActive: !isActive,
+    updatedAt: Timestamp.fromDate(new Date()),
   };
 
   await updateDoc(postsCollection, data);
@@ -71,5 +76,5 @@ export const postRepository: PostRepository = {
   getAll,
   getById,
   create,
-  remove,
+  toggleActive,
 };
