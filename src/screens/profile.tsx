@@ -19,8 +19,6 @@ const Profile = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  console.log({ state });
-
   const { data: posts, isLoading } = useQuery({
     queryKey: [QUERY.posts.getAllMyPosts],
     queryFn: () => {

@@ -3,7 +3,7 @@ import {
   FaRegClock,
   FaCheck,
   FaXmark,
-  FaGlobe,
+  FaEarthAmericas,
   FaLock,
 } from "react-icons/fa6";
 import { formatDate } from "../helpers/date.helper";
@@ -33,7 +33,7 @@ export const Card = (props: CardProps) => {
   };
 
   const config = visibilityConfig[props.isActive ? "show" : "hide"];
-  const Icon = !props.isActive ? FaLock : FaGlobe;
+  const Icon = !props.isActive ? FaLock : FaEarthAmericas;
 
   return (
     <Wrapper
