@@ -4,8 +4,9 @@ import { lazy } from "react";
 import ProtectedRoute from "./protected-route";
 
 const Home = lazy(() => import("../screens/home"));
-const MyPosts = lazy(() => import("../screens/posts/my-posts"));
 const CreateNewPost = lazy(() => import("../screens/posts/create-post"));
+const AllPosts = lazy(() => import("../screens/posts/all-posts"));
+const Profile = lazy(() => import("../screens/profile"));
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
         path: "/posts",
         children: [
           {
+            index: true,
+            Component: AllPosts,
+          },
+          {
             path: ":slug",
             Component: Home,
           },
@@ -26,7 +31,7 @@ export const router = createBrowserRouter([
         path: "/my-workspace",
         element: <ProtectedRoute />,
         children: [
-          { path: "my-posts", Component: MyPosts },
+          { index: true, Component: Profile },
           { path: "create-new-post", Component: CreateNewPost },
         ],
       },

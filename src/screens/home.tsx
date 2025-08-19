@@ -25,6 +25,7 @@ const Home = () => {
           </p>
         </div>
       </section>
+
       <section className="py-16">
         <HeaderSection title="Últimas publicaciones" />
 
