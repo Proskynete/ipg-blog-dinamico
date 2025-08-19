@@ -5,4 +5,5 @@ export interface PostRepository {
   getById: (id: string) => Promise<Post | null>;
   create: (data: CreatePost, uid: string) => Promise<void>;
   toggleActive: (id: string, isActive: boolean) => Promise<void>;
+  verifySlug: (slug: string) => Promise<boolean>;
 }

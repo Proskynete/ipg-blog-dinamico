@@ -72,9 +72,17 @@ const toggleActive = async (id: string, isActive: boolean): Promise<void> => {
   await updateDoc(postsCollection, data);
 };
 
+const verifySlug = async (slug: string): Promise<boolean> => {
+  const postsCollection = collection(firebaseDB, "posts");
+  const q = query(postsCollection, where("slug", "==", slug));
+  const querySnapshot = await getDocs(q);
+  return !querySnapshot.empty;
+};
+
 export const postRepository: PostRepository = {
   getAll,
   getById,
   create,
   toggleActive,
+  verifySlug,
 };

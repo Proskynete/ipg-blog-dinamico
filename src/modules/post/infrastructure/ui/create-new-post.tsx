@@ -5,30 +5,49 @@ import { DEFAULT_POST_VALUES } from "../constants/default-values.constant";
 import { FaCircleInfo } from "react-icons/fa6";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { postRepository } from "../services/create-post.service";
+import { clearString } from "../../../../helpers/common.helper";
 
 interface CreateNewPostProps {
   onSubmit: (data: PostValues) => void;
+  isLoading: boolean;
 }
 
-export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
+export const CreateNewPostForm = ({
+  onSubmit,
+  isLoading,
+}: CreateNewPostProps) => {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    setError,
+    clearErrors,
     formState: { errors, isDirty },
   } = useForm<PostValues>({
     resolver: zodResolver(createNewPostSchema),
-    mode: "onChange",
     defaultValues: DEFAULT_POST_VALUES,
   });
 
   const handleCreateSlug = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const slug = e.target.value
-      .toLowerCase()
-      .replace(/ /g, "-")
-      .replace(/[^\w-]+/g, "");
-    setValue("slug", slug);
+    setValue("title", e.target.value);
+    setValue("slug", clearString(e.target.value));
+  };
+
+  const handleVerifySlug = async () => {
+    const slug = watch("slug");
+    if (slug) {
+      const isTaken = await postRepository.verifySlug(slug);
+      if (isTaken) {
+        setError("slug", {
+          type: "manual",
+          message: "Este slug ya está en uso.",
+        });
+      } else {
+        clearErrors("slug");
+      }
+    }
   };
 
   const isBeyondLimit = watch("excerpt")?.length > 160;
@@ -48,6 +67,7 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
                 aria-invalid={errors.title ? "true" : "false"}
                 {...register("title")}
                 onChange={handleCreateSlug}
+                onBlur={handleVerifySlug}
               />
               <p className="label text-xs">{errors.title?.message}</p>
             </div>
@@ -69,7 +89,7 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
                 className={`input w-full ${errors.slug ? "input-error" : ""}`}
                 placeholder="titulo-del-sitio"
                 aria-invalid={errors.slug ? "true" : "false"}
-                disabled
+                readOnly
                 {...register("slug")}
               />
               <p className="label text-xs">{errors.slug?.message}</p>
@@ -168,7 +188,7 @@ export const CreateNewPostForm = ({ onSubmit }: CreateNewPostProps) => {
       <button
         className="btn btn-outline btn-secondary"
         type="submit"
-        disabled={!isDirty}
+        disabled={!isDirty || isLoading}
       >
         Crear artículo
       </button>

@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { HeaderSection } from "../../components/header-section.component";
 import { useAuth } from "../../modules/auth/infrastructure/ui/hooks/useAuth";
 import type { PostValues } from "../../modules/post/domain/post.schema";
@@ -7,16 +8,21 @@ import { CreateNewPostForm } from "../../modules/post/infrastructure/ui/create-n
 const CreateNewPost = () => {
   const { state } = useAuth();
 
+  const mutation = useMutation({
+    mutationFn: ({ data, uid }: { data: PostValues; uid: string }) =>
+      postRepository.create(data, uid),
+  });
+
   const onSubmit = async (data: PostValues) => {
     if (state.state === "SIGNED_IN") {
-      await postRepository.create(data, state.currentUser.uid);
+      mutation.mutate({ data, uid: state.currentUser.uid });
     }
   };
 
   return (
     <section className="py-16">
       <HeaderSection title="Crear nuevo artículo" />
-      <CreateNewPostForm onSubmit={onSubmit} />
+      <CreateNewPostForm onSubmit={onSubmit} isLoading={mutation.isPending} />
     </section>
   );
 };
