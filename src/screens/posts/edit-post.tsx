@@ -34,12 +34,14 @@ const EditPost = () => {
         <HeaderSection title="Editar artículo" />
         {isLoading && <p>Cargando...</p>}
 
-        <PostForm
-          onSubmit={onSubmit}
-          isLoading={mutation.isPending || isLoading}
-          isSuccess={mutation.isSuccess}
-          defaultValues={postInfo!}
-        />
+        {postInfo && (
+          <PostForm
+            onSubmit={onSubmit}
+            isLoading={mutation.isPending || isLoading}
+            isSuccess={mutation.isSuccess}
+            defaultValues={postInfo}
+          />
+        )}
       </section>
     </>
   );

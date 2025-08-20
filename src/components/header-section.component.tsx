@@ -15,7 +15,7 @@ export const HeaderSection = ({ title, actions }: HeaderSectionProps) => {
       <div className="w-full flex items-center justify-between">
         <h3 className="text-2xl font-light text-gray-900">{title}</h3>
         {actions && (
-          <div className="flex items-centermt-4">
+          <div className="flex items-center">
             {actions.map((action, index) => (
               <button
                 key={index}

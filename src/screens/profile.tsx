@@ -74,7 +74,7 @@ const Profile = () => {
               <p className="text-gray-600 mb-4 max-w-2xl flex items-baseline gap-1">
                 {state.currentUser.email}
                 {state.currentUser.emailVerified && (
-                  <p className="text-xs inline">(verificado)</p>
+                  <span className="text-xs inline">(verificado)</span>
                 )}
               </p>
               <div className="flex flex-wrap gap-6 text-sm text-gray-500">

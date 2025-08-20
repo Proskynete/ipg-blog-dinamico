@@ -236,7 +236,7 @@ export const PostForm = ({
         type="submit"
         disabled={!isDirty || isLoading}
       >
-        Crear artículo
+        {defaultValues ? "Actualizar artículo" : "Crear artículo"}
       </button>
     </form>
   );
