@@ -111,7 +111,11 @@ export const PostForm = ({
                 {...register("title")}
                 onChange={handleCreateSlug}
                 onBlur={() => {
-                  if (!defaultValues || defaultValues.title !== watch("title"))
+                  if (
+                    !defaultValues ||
+                    defaultValues.title !== watch("title") ||
+                    defaultValues.slug !== watch("slug")
+                  )
                     handleVerifySlug();
                 }}
               />
