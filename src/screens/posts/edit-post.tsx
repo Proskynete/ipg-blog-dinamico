@@ -10,7 +10,7 @@ const EditPost = () => {
   const { slug } = useParams();
 
   const { data: postInfo, isLoading } = useQuery({
-    queryKey: [QUERY.posts.getBySlug],
+    queryKey: [QUERY.posts.getBySlug, slug],
     queryFn: () => postRepository.getBySlug(slug!),
     enabled: !!slug,
   });
@@ -31,11 +31,14 @@ const EditPost = () => {
       <title>Editar el artículo {postInfo?.title} - Blog Dinámico</title>
 
       <section className="py-16">
-        <HeaderSection title="Crear nuevo artículo" />
+        <HeaderSection title="Editar artículo" />
+        {isLoading && <p>Cargando...</p>}
+
         <PostForm
           onSubmit={onSubmit}
           isLoading={mutation.isPending || isLoading}
           isSuccess={mutation.isSuccess}
+          defaultValues={postInfo!}
         />
       </section>
     </>

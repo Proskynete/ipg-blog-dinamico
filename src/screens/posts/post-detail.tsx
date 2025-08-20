@@ -9,7 +9,7 @@ const PostDetail = () => {
   const { slug } = useParams();
 
   const { data, isLoading } = useQuery({
-    queryKey: [QUERY.posts.getBySlug],
+    queryKey: [QUERY.posts.getBySlug, slug],
     queryFn: () => postRepository.getBySlug(slug!),
     enabled: !!slug,
   });

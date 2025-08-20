@@ -7,7 +7,6 @@ import {
   FaLock,
 } from "react-icons/fa6";
 import { formatDate } from "../helpers/date.helper";
-import { NavLink } from "react-router";
 import type { Post } from "../modules/post/domain/post.domain";
 
 interface CardProps extends Post {
@@ -15,8 +14,6 @@ interface CardProps extends Post {
 }
 
 export const Card = (props: CardProps) => {
-  const Wrapper = props.toggleAction ? "div" : NavLink;
-
   const visibilityConfig = {
     show: {
       label: "Visible",
@@ -36,8 +33,7 @@ export const Card = (props: CardProps) => {
   const Icon = !props.isActive ? FaLock : FaEarthAmericas;
 
   return (
-    <Wrapper
-      to={`/posts/${props.slug}`}
+    <div
       data-slot="card"
       className={`bg-card relative text-card-foreground flex flex-col gap-6 rounded-xl py-6 overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer ${
         props.toggleAction ? `${config.bgColor} ${config.borderColor}` : ``
@@ -108,6 +104,6 @@ export const Card = (props: CardProps) => {
           </div>
         )}
       </div>
-    </Wrapper>
+    </div>
   );
 };

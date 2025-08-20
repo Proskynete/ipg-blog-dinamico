@@ -3,6 +3,7 @@ import { HeaderSection } from "../components/header-section.component";
 import { postRepository } from "../modules/post/infrastructure/services/post.service";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY } from "../constants/query-keys.constant";
+import { NavLink } from "react-router";
 
 const Home = () => {
   const { data: posts, isLoading } = useQuery({
@@ -34,7 +35,11 @@ const Home = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading && <p>Cargando publicaciones...</p>}
           {posts && posts.length > 0 ? (
-            posts.map((post) => <Card key={post.id} {...post} />)
+            posts.map((post) => (
+              <NavLink key={post.id} to={`/posts/${post.slug}`}>
+                <Card {...post} />
+              </NavLink>
+            ))
           ) : (
             <p>No hay publicaciones disponibles.</p>
           )}

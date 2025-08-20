@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa6";
 import { QUERY } from "../constants/query-keys.constant";
 import { postRepository } from "../modules/post/infrastructure/services/post.service";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { Card } from "../components/card.component";
 
 const Profile = () => {
@@ -150,11 +150,15 @@ const Profile = () => {
 
           {posts && posts.length > 0 ? (
             posts.map((post) => (
-              <Card
+              <NavLink
                 key={post.id}
-                {...post}
-                toggleAction={() => toggleAction(post.id, post.isActive)}
-              />
+                to={`/my-workspace/edit-post/${post.slug}`}
+              >
+                <Card
+                  {...post}
+                  toggleAction={() => toggleAction(post.id, post.isActive)}
+                />
+              </NavLink>
             ))
           ) : (
             <p>No tienes publicaciones aún.</p>

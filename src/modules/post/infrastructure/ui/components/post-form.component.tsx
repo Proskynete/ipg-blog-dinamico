@@ -1,28 +1,36 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createNewPostSchema, type PostValues } from "../../../domain/post.schema";
-import { DEFAULT_POST_VALUES } from "../../constants/default-values.constant";
+import {
+  createNewPostSchema,
+  type PostValues,
+} from "../../../domain/post.schema";
 import { FaCircleInfo } from "react-icons/fa6";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { postRepository } from "../../services/post.service";
 import { clearString } from "../../../../../helpers/common.helper";
 import { useEffect, useState } from "react";
+import type { Post } from "../../../domain/post.domain";
+import { useNavigate } from "react-router";
 
 interface PostFormProps {
   onSubmit: (data: PostValues) => void;
   isLoading: boolean;
   isSuccess: boolean;
-  defaultValues?: PostValues;
+  defaultValues?: Post;
 }
 
 export const PostForm = ({
   onSubmit,
   isLoading,
   isSuccess,
-  defaultValues = DEFAULT_POST_VALUES,
+  defaultValues,
 }: PostFormProps) => {
-  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState({
+    message: "",
+    show: false,
+  });
 
   const {
     register,
@@ -31,7 +39,6 @@ export const PostForm = ({
     watch,
     setError,
     clearErrors,
-    reset,
     formState: { errors, isDirty },
   } = useForm<PostValues>({
     resolver: zodResolver(createNewPostSchema),
@@ -62,20 +69,31 @@ export const PostForm = ({
 
   useEffect(() => {
     if (isSuccess) {
-      reset();
-      setShow(true);
+      setShowToast({
+        message: `Artículo ${
+          defaultValues ? "editado" : "creado"
+        } correctamente`,
+        show: true,
+      });
 
       setTimeout(() => {
-        setShow(false);
+        setShowToast({
+          message: "",
+          show: false,
+        });
+
+        navigate("/my-workspace");
       }, 3000);
     }
-  }, [isSuccess, reset]);
+  }, [isSuccess, defaultValues, navigate]);
 
   return (
     <form className="mx-auto w-full" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`toast toast-end z-50 ${show ? "show" : "hidden"}`}>
-        <div className="alert alert-success">
-          <span>Message sent successfully.</span>
+      <div
+        className={`toast toast-end z-50 ${showToast.show ? "show" : "hidden"}`}
+      >
+        <div className={`alert alert-success`}>
+          <span>{showToast.message}</span>
         </div>
       </div>
 
@@ -92,7 +110,10 @@ export const PostForm = ({
                 aria-invalid={errors.title ? "true" : "false"}
                 {...register("title")}
                 onChange={handleCreateSlug}
-                onBlur={handleVerifySlug}
+                onBlur={() => {
+                  if (!defaultValues || defaultValues.title !== watch("title"))
+                    handleVerifySlug();
+                }}
               />
               <p className="label text-xs">{errors.title?.message}</p>
             </div>
