@@ -59,6 +59,18 @@ const create = async (data: CreatePost, uid: string): Promise<void> => {
   setDoc(doc(firebaseDB, "posts", crypto.randomUUID()), newPost);
 };
 
+const edit = async (id: string, data: CreatePost): Promise<void> => {
+  const postRef = doc(firebaseDB, "posts", id);
+
+  const updatedPost = {
+    ...data,
+    updatedAt: Timestamp.fromDate(new Date()),
+    readTime: calculateReadingTime(data.content),
+  };
+
+  await updateDoc(postRef, updatedPost);
+};
+
 const toggleActive = async (id: string, isActive: boolean): Promise<void> => {
   const postsCollection = doc(firebaseDB, "posts", id);
 
@@ -81,6 +93,7 @@ export const postRepository: PostRepository = {
   getAll,
   getBySlug,
   create,
+  edit,
   toggleActive,
   verifySlug,
 };

@@ -1,6 +1,6 @@
 import { Card } from "../components/card.component";
 import { HeaderSection } from "../components/header-section.component";
-import { postRepository } from "../modules/post/infrastructure/services/create-post.service";
+import { postRepository } from "../modules/post/infrastructure/services/post.service";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY } from "../constants/query-keys.constant";
 

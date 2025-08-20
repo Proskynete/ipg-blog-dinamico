@@ -10,7 +10,7 @@ import {
   FaPlus,
 } from "react-icons/fa6";
 import { QUERY } from "../constants/query-keys.constant";
-import { postRepository } from "../modules/post/infrastructure/services/create-post.service";
+import { postRepository } from "../modules/post/infrastructure/services/post.service";
 import { useNavigate } from "react-router";
 import { Card } from "../components/card.component";
 

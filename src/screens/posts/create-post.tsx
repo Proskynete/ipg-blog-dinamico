@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { HeaderSection } from "../../components/header-section.component";
 import { useAuth } from "../../modules/auth/infrastructure/ui/hooks/useAuth";
 import type { PostValues } from "../../modules/post/domain/post.schema";
-import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
-import { CreateNewPostForm } from "../../modules/post/infrastructure/ui/create-new-post";
+import { postRepository } from "../../modules/post/infrastructure/services/post.service";
+import { PostForm } from "../../modules/post/infrastructure/ui/components/post-form.component";
 
 const CreateNewPost = () => {
   const { state } = useAuth();
@@ -24,7 +24,7 @@ const CreateNewPost = () => {
       <title>Crear nuevo artículo - Blog Dinámico</title>
       <section className="py-16">
         <HeaderSection title="Crear nuevo artículo" />
-        <CreateNewPostForm
+        <PostForm
           onSubmit={onSubmit}
           isLoading={mutation.isPending}
           isSuccess={mutation.isSuccess}

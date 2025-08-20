@@ -1,25 +1,27 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createNewPostSchema, type PostValues } from "../../domain/post.schema";
-import { DEFAULT_POST_VALUES } from "../constants/default-values.constant";
+import { createNewPostSchema, type PostValues } from "../../../domain/post.schema";
+import { DEFAULT_POST_VALUES } from "../../constants/default-values.constant";
 import { FaCircleInfo } from "react-icons/fa6";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { postRepository } from "../services/create-post.service";
-import { clearString } from "../../../../helpers/common.helper";
+import { postRepository } from "../../services/post.service";
+import { clearString } from "../../../../../helpers/common.helper";
 import { useEffect, useState } from "react";
 
-interface CreateNewPostProps {
+interface PostFormProps {
   onSubmit: (data: PostValues) => void;
   isLoading: boolean;
   isSuccess: boolean;
+  defaultValues?: PostValues;
 }
 
-export const CreateNewPostForm = ({
+export const PostForm = ({
   onSubmit,
   isLoading,
   isSuccess,
-}: CreateNewPostProps) => {
+  defaultValues = DEFAULT_POST_VALUES,
+}: PostFormProps) => {
   const [show, setShow] = useState(false);
 
   const {
@@ -33,7 +35,7 @@ export const CreateNewPostForm = ({
     formState: { errors, isDirty },
   } = useForm<PostValues>({
     resolver: zodResolver(createNewPostSchema),
-    defaultValues: DEFAULT_POST_VALUES,
+    defaultValues,
   });
 
   const handleCreateSlug = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { QUERY } from "../../constants/query-keys.constant";
 import { useQuery } from "@tanstack/react-query";
-import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
+import { postRepository } from "../../modules/post/infrastructure/services/post.service";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 

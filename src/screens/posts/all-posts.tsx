@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { HeaderSection } from "../../components/header-section.component";
 import { QUERY } from "../../constants/query-keys.constant";
-import { postRepository } from "../../modules/post/infrastructure/services/create-post.service";
+import { postRepository } from "../../modules/post/infrastructure/services/post.service";
 import { Card } from "../../components/card.component";
 
 const AllPosts = () => {
