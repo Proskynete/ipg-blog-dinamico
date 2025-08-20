@@ -20,14 +20,17 @@ const CreateNewPost = () => {
   };
 
   return (
-    <section className="py-16">
-      <HeaderSection title="Crear nuevo artículo" />
-      <CreateNewPostForm
-        onSubmit={onSubmit}
-        isLoading={mutation.isPending}
-        isSuccess={mutation.isSuccess}
-      />
-    </section>
+    <>
+      <title>Crear nuevo artículo - Blog Dinámico</title>
+      <section className="py-16">
+        <HeaderSection title="Crear nuevo artículo" />
+        <CreateNewPostForm
+          onSubmit={onSubmit}
+          isLoading={mutation.isPending}
+          isSuccess={mutation.isSuccess}
+        />
+      </section>
+    </>
   );
 };
 

@@ -17,29 +17,34 @@ const PostDetail = () => {
   return isLoading ? (
     "Cargando..."
   ) : (
-    <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap gap-2 mb-1">
-          <span className="badge badge-xs badge-neutral badge-dash capitalize">
-            {data?.category}
-          </span>
-        </div>
+    <>
+      <title>{data?.title} - Blog Dinámico</title>
+      <meta name="description" content={data?.excerpt} />
 
-        <h1 className="text-5xl font-bold uppercase">{data?.title}</h1>
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap gap-2 mb-1">
+            <span className="badge badge-xs badge-neutral badge-dash capitalize">
+              {data?.category}
+            </span>
+          </div>
 
-        <div className="relative h-64 md:h-full mt-7">
-          <img
-            src={data?.image || "/placeholder.svg"}
-            alt={data?.title}
-            className="object-cover w-full rounded-3xl"
-          />
-        </div>
+          <h1 className="text-5xl font-bold uppercase">{data?.title}</h1>
 
-        <div id="articleBody" className="p-1 mt-7">
-          <Markdown remarkPlugins={[remarkGfm]}>{data?.content}</Markdown>
+          <div className="relative h-64 md:h-full mt-7">
+            <img
+              src={data?.image || "/placeholder.svg"}
+              alt={data?.title}
+              className="object-cover w-full rounded-3xl"
+            />
+          </div>
+
+          <div id="articleBody" className="p-1 mt-7">
+            <Markdown remarkPlugins={[remarkGfm]}>{data?.content}</Markdown>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

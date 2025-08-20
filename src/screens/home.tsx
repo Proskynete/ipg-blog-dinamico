@@ -12,6 +12,8 @@ const Home = () => {
 
   return (
     <>
+      <title>Blog Dinámico</title>
+
       <section className="py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-900 leading-tight">
