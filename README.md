@@ -13,7 +13,7 @@ El flujo de la aplicación se centra en la gestión de posts. Los usuarios puede
 - **`layout/main.layout.tsx`**: El layout principal de la aplicación, que incluye el header y el footer.
 - **`screens`**: Contiene los componentes de página para cada ruta, como `home.tsx`, `all-posts.tsx`, `create-post.tsx`, etc.
 - **`modules`**: Contiene la lógica de negocio de la aplicación, separada por dominios como `auth` y `post`.
-  - **`auth`**: Contiene todo lo relacionado con la autenticación, incluyendo el contexto, hooks, y servicios de Firebase.
+  - **`auth`**: Contiene todo lo relacionado con la autenticación, incluyendo el contexto, hooks, y servicios de Firebase con el provider de Google.
   - **`post`**: Contiene la lógica para crear, leer y gestionar posts.
 
 ## Decisiones de Diseño
@@ -24,6 +24,17 @@ El flujo de la aplicación se centra en la gestión de posts. Los usuarios puede
 - **Componentes Reutilizables**: Se han creado componentes genéricos en la carpeta `components` para ser reutilizados a lo largo de la aplicación.
 - **Estilos con Tailwind CSS y DaisyUI**: Se utiliza Tailwind CSS para un desarrollo de UI rápido y personalizable, junto con DaisyUI para componentes de UI pre-construidos.
 
+## Screenshots
+
+### Home
+![Home](docs/home.png)
+
+### Profile
+![Profile](docs/profile.png)
+
+### Create Post
+![Create Post](docs/create-post.png)
+
 ## Instalación
 
 1.  Clona el repositorio:
@@ -32,7 +43,7 @@ El flujo de la aplicación se centra en la gestión de posts. Los usuarios puede
     ```
 2.  Navega al directorio del proyecto:
     ```bash
-    cd blog-dinamico
+    cd ipg-blog-dinamico
     ```
 3.  Instala las dependencias:
     ```bash
