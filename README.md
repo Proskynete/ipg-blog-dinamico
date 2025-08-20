@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# Blog Dinámico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto de un blog dinámico creado con React, Vite, y TypeScript. La aplicación permite a los usuarios ver, crear y gestionar posts, con un sistema de autenticación basado en Firebase.
 
-Currently, two official plugins are available:
+## Flujo de la Aplicación
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El flujo de la aplicación se centra en la gestión de posts. Los usuarios pueden registrarse e iniciar sesión para crear nuevos posts, ver los posts existentes y ver detalles de cada post. Las rutas de la aplicación están protegidas para que solo los usuarios autenticados puedan crear y gestionar sus posts.
 
-## Expanding the ESLint configuration
+## Componentes Principales
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **`app.tsx`**: El componente raíz de la aplicación, donde se configuran los providers de React Query y Autenticación.
+- **`router/index.tsx`**: Define las rutas de la aplicación utilizando `react-router-dom`, incluyendo rutas públicas y protegidas.
+- **`layout/main.layout.tsx`**: El layout principal de la aplicación, que incluye el header y el footer.
+- **`screens`**: Contiene los componentes de página para cada ruta, como `home.tsx`, `all-posts.tsx`, `create-post.tsx`, etc.
+- **`modules`**: Contiene la lógica de negocio de la aplicación, separada por dominios como `auth` y `post`.
+  - **`auth`**: Contiene todo lo relacionado con la autenticación, incluyendo el contexto, hooks, y servicios de Firebase con el provider de Google.
+  - **`post`**: Contiene la lógica para crear, leer y gestionar posts.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Decisiones de Diseño
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Arquitectura Modular**: El proyecto está organizado en módulos (`auth`, `post`) para separar las responsabilidades y facilitar el mantenimiento. Cada módulo sigue una estructura de `application`, `domain`, y `infrastructure`.
+- **Estado Global con React Query**: Se utiliza `@tanstack/react-query` para gestionar el estado del servidor, cachear datos y manejar operaciones asíncronas.
+- **Autenticación con Firebase**: La autenticación de usuarios se gestiona a través de Firebase, proporcionando un sistema seguro y escalable.
+- **Componentes Reutilizables**: Se han creado componentes genéricos en la carpeta `components` para ser reutilizados a lo largo de la aplicación.
+- **Estilos con Tailwind CSS y DaisyUI**: Se utiliza Tailwind CSS para un desarrollo de UI rápido y personalizable, junto con DaisyUI para componentes de UI pre-construidos.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Screenshots
+
+### Home
+![Home](docs/home.png)
+
+### Profile
+![Profile](docs/profile.png)
+
+### Create Post
+![Create Post](docs/create-post.png)
+
+## Instalación
+
+1.  Clona el repositorio:
+    ```bash
+    git clone git@github.com:Proskynete/ipg-blog-dinamico.git
+    ```
+2.  Navega al directorio del proyecto:
+    ```bash
+    cd ipg-blog-dinamico
+    ```
+3.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+4.  Crea un archivo `.env` a partir del template `.env.template` y añade las siguientes credenciales de Firebase.
+
+```bash
+VITE_FIREBASE_APIKEY="AIzaSyBz-29rNfsur13Ys1ekTBtlNpTsh1IPEMM"
+VITE_FIREBASE_AUTHDOMAIN="frontend-semana-4-encargo.firebaseapp.com"
+VITE_FIREBASE_PROJECTID="frontend-semana-4-encargo"
+VITE_FIREBASE_STORAGEBUCKET="frontend-semana-4-encargo.firebasestorage.app"
+VITE_FIREBASE_MESSAGINGSENDERID="958021446911"
+VITE_FIREBASE_APPID="1:958021446911:web:a3c4d30ca305306b6370ca"
+VITE_FIREBASE_MEASUREMENTID="G-G34JP2Y090"
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Ejecución
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Para ejecutar la aplicación en modo de desarrollo, utiliza el siguiente comando:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Esto iniciará un servidor de desarrollo en `http://localhost:5173`.
+
+### Otros Comandos
+
+- **Build**: `npm run build`
+- **Lint**: `npm run lint`
+- **Test**: `npm run test`
