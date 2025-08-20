@@ -7,16 +7,21 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { postRepository } from "../services/create-post.service";
 import { clearString } from "../../../../helpers/common.helper";
+import { useEffect, useState } from "react";
 
 interface CreateNewPostProps {
   onSubmit: (data: PostValues) => void;
   isLoading: boolean;
+  isSuccess: boolean;
 }
 
 export const CreateNewPostForm = ({
   onSubmit,
   isLoading,
+  isSuccess,
 }: CreateNewPostProps) => {
+  const [show, setShow] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -24,6 +29,7 @@ export const CreateNewPostForm = ({
     watch,
     setError,
     clearErrors,
+    reset,
     formState: { errors, isDirty },
   } = useForm<PostValues>({
     resolver: zodResolver(createNewPostSchema),
@@ -52,8 +58,25 @@ export const CreateNewPostForm = ({
 
   const isBeyondLimit = watch("excerpt")?.length > 160;
 
+  useEffect(() => {
+    if (isSuccess) {
+      reset();
+      setShow(true);
+
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
+    }
+  }, [isSuccess, reset]);
+
   return (
     <form className="mx-auto w-full" onSubmit={handleSubmit(onSubmit)}>
+      <div className={`toast toast-end z-50 ${show ? "show" : "hidden"}`}>
+        <div className="alert alert-success">
+          <span>Message sent successfully.</span>
+        </div>
+      </div>
+
       <div className="w-full mt-5 sm:mt-8 pb-8">
         <div className="mx-auto w-full flex flex-col gap-5">
           <div className="flex flex-col sm:flex-row gap-3">
@@ -169,7 +192,7 @@ export const CreateNewPostForm = ({
               <p className="label">Preview</p>
               <div className="mockup-browser border-base-300 border w-full">
                 <div className="mockup-browser-toolbar">
-                  <div className="input">https://eduardoalvarez.dev</div>
+                  <div className="input">https://lorem-ipsum.cl</div>
                 </div>
                 <div
                   id="articleBody"

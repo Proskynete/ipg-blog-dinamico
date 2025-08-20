@@ -6,7 +6,6 @@ import {
   collection,
   doc,
   getDocs,
-  getDoc,
   setDoc,
   Timestamp,
   updateDoc,
@@ -33,19 +32,18 @@ const getAll = async (bellowTo?: string): Promise<Post[]> => {
   return posts;
 };
 
-const getById = async (id: string): Promise<Post | null> => {
-  const postsCollection = doc(firebaseDB, "posts", id);
-  const postSnapshot = await getDoc(postsCollection);
+const getBySlug = async (slug: string): Promise<Post | null> => {
+  const postsCollection = collection(firebaseDB, "posts");
+  const q = query(postsCollection, where("slug", "==", slug));
+  const querySnapshot = await getDocs(q);
 
-  if (postSnapshot.exists()) {
-    if (!postSnapshot.data()?.isActive) {
-      return {
-        id: postSnapshot.id,
-        ...(postSnapshot.data() as Omit<Post, "id">),
-      };
-    }
-  }
-  return null;
+  if (querySnapshot.empty) return null;
+  const doc = querySnapshot.docs[0];
+
+  return {
+    id: doc.id,
+    ...(doc.data() as Omit<Post, "id">),
+  };
 };
 
 const create = async (data: CreatePost, uid: string): Promise<void> => {
@@ -81,7 +79,7 @@ const verifySlug = async (slug: string): Promise<boolean> => {
 
 export const postRepository: PostRepository = {
   getAll,
-  getById,
+  getBySlug,
   create,
   toggleActive,
   verifySlug,

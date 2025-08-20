@@ -7,6 +7,7 @@ const Home = lazy(() => import("../screens/home"));
 const CreateNewPost = lazy(() => import("../screens/posts/create-post"));
 const AllPosts = lazy(() => import("../screens/posts/all-posts"));
 const Profile = lazy(() => import("../screens/profile"));
+const PostDetail = lazy(() => import("../screens/posts/post-detail"));
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ":slug",
-            Component: Home,
+            Component: PostDetail,
           },
         ],
       },
