@@ -91,7 +91,12 @@ export const Card = (props: CardProps) => {
         </div>
 
         {props.toggleAction && (
-          <div className="absolute bottom-1.5 right-1.5">
+          <div
+            className="absolute bottom-1.5 right-1.5"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
             <label className="toggle text-base-content">
               <input
                 type="checkbox"
